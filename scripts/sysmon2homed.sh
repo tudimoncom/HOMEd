@@ -14,5 +14,13 @@ cpuidle=`top -n1 | head -n2 |grep CPU | awk -F ' ' '{print $8}' | sed 's/%//'`
 cpuuse=$(( 100 - $cpuidle ))
 #echo $cpuuse
 
-mosquitto_pub -h localhost -p 1883 -t homed/fd/custom/gwt360sysmon -m "{\"cpuidle\":$cpuidle,\"cpuuse\":$cpuuse,\"freemem\":$freemem_k}" -u "usermqtt" -P "***"
+# disk /dev/root
+diskused=`df -m |grep /dev/root | awk -F ' ' '{print $3}' `
+diskfree=`df -m |grep /dev/root | awk -F ' ' '{print $4}' `
+diskusedpers=`df -m |grep /dev/root | awk -F ' ' '{print $5}' | sed 's/%//'`
+#echo $diskused
+#echo $diskfree
+#echo $diskusedpers
+
+mosquitto_pub -h localhost -p 1883 -t homed/fd/custom/gwt360sysmon -m "{\"cpuidle\":$cpuidle,\"cpuuse\":$cpuuse,\"freemem\":$freemem_k,\"diskused\":$diskused,\"diskfree\":$diskfree,\"diskusedpers\":$diskusedpers}" -u "usermqtt" -P "***"
 
