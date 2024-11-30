@@ -28,5 +28,5 @@ diskfree=$(echo $dskf | cut -d " " -f 4)
 diskusedpers=$(echo $dskf | cut -d " " -f 5 | sed 's/%//') 
 #echo $diskusedpers
 
-mosquitto_pub -h localhost -p 1883 -t homed/fd/custom/gwt360sysmon -m "{\"cpuidle\":$cpuidle,\"cpuuse\":$cpuuse,\"freemem\":$freemem_k,\"diskused\":$diskused,\"diskfree\":$diskfree,\"diskusedpers\":$diskusedpers}" -u "usermqtt" -P "***"
+mosquitto_pub -h localhost -p 1883 -t homed/fd/custom/gwt360sysmon -m "{\"cpuidle\":$cpuidle,\"cpuuse\":$cpuuse,\"freemem\":$freemem_k,\"diskused\":$diskused,\"diskfree\":$diskfree,\"diskusedpers\":$diskusedpers}" -u "homed" -P "pass_mqtt_homed"
 
