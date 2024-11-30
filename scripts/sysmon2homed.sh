@@ -1,4 +1,7 @@
 #!/bin/sh
+# Mini System Monitor для HOMEd - запрашивает инфу о CPU, RAM, ROM и обновляет
+# custom sensor в HOMEd установленом на OpenWRT
+# Автор tudimon.com
 
 # Free Memory
 freemem=`free -h |grep Mem | awk -F ' ' '{print $4}'`
@@ -15,11 +18,14 @@ cpuuse=$(( 100 - $cpuidle ))
 #echo $cpuuse
 
 # disk /dev/root
-diskused=`df -m |grep /dev/root | awk -F ' ' '{print $3}' `
-diskfree=`df -m |grep /dev/root | awk -F ' ' '{print $4}' `
-diskusedpers=`df -m |grep /dev/root | awk -F ' ' '{print $5}' | sed 's/%//'`
+dskf=`df -m |grep /dev/root`
+#echo $dskf
+
+diskused=$(echo $dskf | cut -d " " -f 3)
 #echo $diskused
+diskfree=$(echo $dskf | cut -d " " -f 4)
 #echo $diskfree
+diskusedpers=$(echo $dskf | cut -d " " -f 5 | sed 's/%//') 
 #echo $diskusedpers
 
 mosquitto_pub -h localhost -p 1883 -t homed/fd/custom/gwt360sysmon -m "{\"cpuidle\":$cpuidle,\"cpuuse\":$cpuuse,\"freemem\":$freemem_k,\"diskused\":$diskused,\"diskfree\":$diskfree,\"diskusedpers\":$diskusedpers}" -u "usermqtt" -P "***"
