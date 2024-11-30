@@ -1,4 +1,7 @@
 #!/bin/sh
+# Скрипт выясняет наш внешний IP адрес и обновляет
+# custom sensor в HOMEd установленом на OpenWRT
+# Автор tudimon.com
 
 # external ip
 ext_ip=`curl 2ip.ru`
