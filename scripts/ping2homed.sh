@@ -19,4 +19,4 @@ fi
 #echo $ip_status
 
 # пушим в mqtt homed
-mosquitto_pub -h localhost -p 1883 -t homed/td/custom/telephone -m "{\"select\":\"$ip_status\"}" -u "homed" -P "pass_homed" 
+mosquitto_pub -h localhost -p 1883 -t homed/td/custom/telephone -m "{\"select\":\"$ip_status\"}" -u "homed" -P "pass_mqtt_homed"
