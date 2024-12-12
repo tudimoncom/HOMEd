@@ -5,3 +5,5 @@
 
 /scripts/extip2homed.sh - 
 Скрипт который запрашивает у 2ip.ru внешний ip адрес и потом пихает эти значения в custom сенсор HOMEd (используется mosquitto_pub и mqtt)
+
+/scripts/backup-homed.sh - Скрипт, который архивирует конфигурацию HOMEd на OpenWRT в папку на том же устройстве и удалять старые копии.
