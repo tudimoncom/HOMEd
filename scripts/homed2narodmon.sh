@@ -1,5 +1,5 @@
 #!/bin/sh
-# Скрипт заправшивает значение датчиков в HOMEd, а потом публикует значения на 
+# Скрипт запрашивает значение датчиков в HOMEd, а потом публикует значения на 
 # сервис Народный Мониторинг (narodmon.ru)
 # Автор tudimon.com
 
@@ -20,7 +20,7 @@ SENSOR_ID_2="Hulitsa"
 
 # В файле /opt/homed-zigbee/options.json нужно добавить опцию "retain":true для нашего сенсора
 # https://t.me/homed_chat/151492
-# так же нужно устаровить пакет jq - Lightweight and flexible command-line JSON processor
+# так же нужно установить пакет jq - Lightweight and flexible command-line JSON processor
 
 # читаем значение сенсора из MQTT
 thulitsa=`mosquitto_sub -h localhost -p 1883 -t homed/fd/zigbee/TH_ulitsa -C 1 -u "homed" -P "pass_homed"`
